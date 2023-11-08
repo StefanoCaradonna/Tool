@@ -12,28 +12,29 @@ const Server = require("socket.io").Server;
 
 // init express
 const app = express();
-const port = 3001;
+const port = 5001;
 
 // set-up the middlewares
 app.use(morgan('dev'));
 //app.use(express.json());  //per quando riceveremo richieste
 app.use(cors());
 
-const server = http.createServer(app);
-const io = new Server(server, {
+const server = http.createServer(app)
+const io = new Server(server , {
     cors:{
-      origin:"*"
+        origin:"*"
     }
 })
 
+
 const _dirname = path.dirname("");
-const buildPath = path.join(_dirname , "../client/build")
+const buildPath = path.join(_dirname , "../client/")
 
 app.use(express.static(buildPath)); 
 
 app.get("/*", (req, res)=>{
   res.sendFile(
-    path.join(_dirname, "../client/build/index.html"),
+    path.join(_dirname, "../client/index.html"),
     function(err){
       if (err){
         res.status(500).send(err);
@@ -43,7 +44,7 @@ app.get("/*", (req, res)=>{
 })
 
 //APP
-const answerDelay = 1000;
+const answerDelay = 0;
 
 
 
